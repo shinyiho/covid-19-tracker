@@ -74,8 +74,8 @@ function App() {
         <div className="app__header">
           <h1>COVID-19 TRACKER</h1>
 
-          <FormControl>
-            <Select variant="outlined" onChange={onCountryChange} value={country}>
+          <FormControl onChange={onCountryChange}>
+            <Select variant="outlined" value={country}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
               console.log(countries[0])
               {countries.map((country, i) => (
