@@ -32,19 +32,19 @@ function App() {
       fetch("https://disease.sh/v3/covid-19/countries")
         .then((response) => response.json())
         .then((data) => {
-          let countries = data.map((country) => ({
+          let fetchedCountries = data.map((country) => ({
             name: country.country,
             value: country.countryInfo.iso2,
           }));
 
           let sortedData = data.sort((a, b) => b.cases - a.cases);
           settableData(sortedData);
-          setcountries(countries);
+          setcountries(fetchedCountries);
           setmapcountry(data);
         });
     };
     fetchingDataFromDiseaseSh();
-  }, [countries]);
+  }, []);
   const onCountryChange = (e) => {
     let countryCode = e.target.value;
     let url =
@@ -74,12 +74,10 @@ function App() {
         <div className="app__header">
           <h1>COVID-19 TRACKER</h1>
 
-          <FormControl onChange={onCountryChange}>
-            <Select variant="outlined" value={country}>
+          <FormControl>
+            <Select onChange={onCountryChange} variant="outlined" value={country}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
-              console.log(countries[0])
               {countries.map((country, i) => (
-                // console.log()
                 <MenuItem key={i} value={country.value}>
                   {country.name}
                 </MenuItem>
